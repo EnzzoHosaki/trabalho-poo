@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="140.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.trabalhoPoo.controller.LoginController">
+    <children>
+        <Label text="Email:" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+        <TextField fx:id="emailField" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+
+        <Label text="Senha:" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0" />
+        <PasswordField fx:id="senhaField" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
+
+        <Button onAction="#handleLogin" text="Entrar" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="100.0" />
+        <Button onAction="#handleCadastro" text="Cadastrar-se" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0" />
+    </children>
+</AnchorPane>

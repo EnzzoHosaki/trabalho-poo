@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.trabalhoPoo.controller.CadastroController"
+            prefHeight="300.0" prefWidth="400.0">
+
+    <children>
+        <Label text="Nome:" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0"/>
+        <TextField fx:id="nomeField" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0"/>
+
+        <Label text="Email:" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0"/>
+        <TextField fx:id="emailField" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0"/>
+
+        <Label text="Senha:" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="100.0"/>
+        <PasswordField fx:id="senhaField" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0"/>
+
+        <Label text="Confirmar Senha:" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="140.0"/>
+        <PasswordField fx:id="confirmarSenhaField" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="140.0"/>
+
+        <Button text="Cadastrar" onAction="#handleCadastrar" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="220.0"/>
+        <Button text="Voltar" onAction="#handleVoltarLogin" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="220.0"/>
+
+    </children>
+</AnchorPane>
