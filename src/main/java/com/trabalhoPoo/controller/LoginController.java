@@ -56,8 +56,8 @@ public class LoginController {
                     usuarioDAO.atualizarUsuario(usuario);
 
                     System.out.println("Senha migrada com sucesso!");
-                    abrirDashboard(usuario); // Agora o login funciona
-                    return; //  <-- Importante!
+                    abrirDashboard(usuario);
+                    return;
                 }
 
                 // 3. SE AMBAS AS TENTATIVAS FALHAREM:

@@ -25,43 +25,40 @@ public class DashboardController {
     @FXML
     private Label welcomeLabel;
     @FXML
-    private TableView<Projeto> projetosTable; // TableView para exibir os projetos
+    private TableView<Projeto> projetosTable;
     @FXML
-    private TableColumn<Projeto, String> nomeCol; // Coluna para o nome do projeto
+    private TableColumn<Projeto, String> nomeCol;
     @FXML
-    private TableColumn<Projeto, LocalDate> dataTerminoCol; // Coluna para a data de término
+    private TableColumn<Projeto, LocalDate> dataTerminoCol;
     @FXML
-    private TableColumn<Projeto, String> statusCol; // Coluna para o status
+    private TableColumn<Projeto, String> statusCol;
     @FXML
     private Button criarProjetoButton;
 
 
     private Usuario usuarioLogado;
-    private ProjetoDAO projetoDAO = new ProjetoDAO(); // Instância do DAO
-    private ObservableList<Projeto> projetosData = FXCollections.observableArrayList(); // Lista observável para a TableView
+    private ProjetoDAO projetoDAO = new ProjetoDAO();
+    private ObservableList<Projeto> projetosData = FXCollections.observableArrayList();
 
     public void setUsuarioLogado(Usuario usuario) {
         this.usuarioLogado = usuario;
         welcomeLabel.setText("Bem-vindo, " + usuarioLogado.getNome() + "!");
-        // Verifique se o usuário é um administrador e defina a visibilidade do botão com base nisso
         if ("Administrador".equals(usuario.getTipo())) {
-            criarProjetoButton.setVisible(true); // Torna o botão visível
-            criarProjetoButton.setManaged(true); // Garante que o botão ocupe espaço no layout
+            criarProjetoButton.setVisible(true);
+            criarProjetoButton.setManaged(true);
         } else {
-            criarProjetoButton.setVisible(false); // Torna o botão invisível
-            criarProjetoButton.setManaged(false); // Garante que o botão não ocupe espaço no layout
+            criarProjetoButton.setVisible(false);
+            criarProjetoButton.setManaged(false);
         }
 
-        carregarProjetos(); // Carrega os projetos após o login
+        carregarProjetos();
     }
 
     @FXML
     private void initialize() {
-        // Configura as colunas da TableView
         nomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
         dataTerminoCol.setCellValueFactory(new PropertyValueFactory<>("dataTermino"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-        //Deixei o botão de criar projeto invisível
         criarProjetoButton.setVisible(false);
         criarProjetoButton.setManaged(false);
     }
@@ -88,8 +85,6 @@ public class DashboardController {
 
             stage.show();
 
-            // Fechar a janela de login, opcional
-            //((Stage) emailField.getScene().getWindow()).close();
         }catch(IOException e){
             showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao abrir a tela de Criar Projeto: " + e.getMessage());
             e.printStackTrace();

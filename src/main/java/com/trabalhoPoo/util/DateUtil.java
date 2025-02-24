@@ -20,7 +20,7 @@ public class DateUtil {
         try {
             return DATE_FORMATTER.parse(dateString, LocalDate::from);
         } catch (DateTimeParseException e) {
-            return null; // Ou lançar uma exceção, dependendo da sua necessidade
+            return null;
         }
     }
 

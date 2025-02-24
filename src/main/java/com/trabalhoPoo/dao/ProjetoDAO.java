@@ -12,8 +12,6 @@ import java.util.List;
 
 public class ProjetoDAO {
 
-    // ... (outros métodos do ProjetoDAO, como adicionarProjeto, que você implementará depois) ...
-
     public List<Projeto> listarProjetos() throws SQLException {
         List<Projeto> projetos = new ArrayList<>();
         String sql = "SELECT * FROM Projetos"; // Consulta simples para pegar *todos* os projetos
@@ -29,7 +27,6 @@ public class ProjetoDAO {
                 projeto.setDataInicio(rs.getDate("data_inicio").toLocalDate()); // Conversão para LocalDate
                 projeto.setDataTermino(rs.getDate("data_termino").toLocalDate());// Conversão para LocalDate
                 projeto.setStatus(rs.getString("status"));
-                // Adicione outros campos, se necessário
 
                 projetos.add(projeto);
             }
@@ -37,8 +34,6 @@ public class ProjetoDAO {
         return projetos;
     }
 
-    // Adicione outros métodos (buscarPorId, atualizar, excluir, etc.) depois.
-    // ...
     public void adicionarProjeto(Projeto projeto) throws SQLException {
         String sql = "INSERT INTO Projetos (nome, descricao, data_inicio, data_termino, status) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
