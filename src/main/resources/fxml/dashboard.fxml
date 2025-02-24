@@ -7,7 +7,19 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.trabalhoPoo.controller.DashboardController"
             prefHeight="400.0" prefWidth="600.0">
+
     <children>
         <Label fx:id="welcomeLabel" text="Bem-vindo!" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0"/>
+
+        <TableView fx:id="projetosTable" AnchorPane.topAnchor="50.0" AnchorPane.leftAnchor="20.0"
+                   AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0">
+            <columns>
+                <TableColumn fx:id="nomeCol" text="Nome do Projeto" prefWidth="150.0" />
+                <TableColumn fx:id="dataTerminoCol" text="Data de Término" prefWidth="100.0" />
+                <TableColumn fx:id="statusCol" text="Status" prefWidth="100.0" />
+            </columns>
+
+        </TableView>
+        <Button fx:id="criarProjetoButton" text="Criar Projeto" onAction="#handleCriarProjeto"  AnchorPane.topAnchor="10.0" AnchorPane.rightAnchor="10.0"/>
     </children>
 </AnchorPane>

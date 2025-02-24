@@ -11,6 +11,7 @@ public class Projeto {
     private LocalDate dataTermino;
     private String status;
 
+
     public Projeto() {
     }
 
