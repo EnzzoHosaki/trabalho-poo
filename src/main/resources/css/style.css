@@ -1,0 +1,64 @@
+/* Estilos Gerais */
+.root {
+    -fx-font-family: "Arial", sans-serif; /* Fonte padrão */
+    -fx-font-size: 14px;
+}
+
+/* Barra Lateral (VBox) */
+.side-menu {
+    -fx-background-color: #333; /* Cor de fundo escura */
+    -fx-padding: 10px;
+}
+
+/* Botões da Barra Lateral */
+.side-menu-button {
+    -fx-background-color: #444; /* Cor de fundo dos botões (um pouco mais clara) */
+    -fx-text-fill: white;       /* Cor do texto dos botões */
+    -fx-border-color: #555;      /* Cor da borda dos botões */
+    -fx-border-width: 0 0 1px 0; /* Borda apenas na parte inferior */
+    -fx-padding: 10px 15px;     /* Espaçamento interno */
+    -fx-alignment: center-left;   /* Alinhamento do texto */
+    -fx-cursor: hand;          /* Muda o cursor para a mãozinha */
+}
+
+.side-menu-button:hover {
+    -fx-background-color: #555; /* Cor de fundo ao passar o mouse */
+}
+
+.side-menu-button:pressed {
+    -fx-background-color: #666; /* Cor de fundo ao clicar */
+}
+
+/* Área de Conteúdo (AnchorPane) */
+.content-area {
+    -fx-background-color: #fff; /* Cor de fundo branca */
+}
+
+/* Tabela (TableView) - Exemplo de Estilização */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #eee;
+}
+
+.table-view .column-header {
+    -fx-font-weight: bold;
+}
+
+.table-view .table-cell {
+    -fx-padding: 5px;
+}
+
+.table-view .table-row-cell:empty { /*Células vazias*/
+    -fx-background-color: white;
+}
+
+
+/* Labels - Exemplo */
+.label {
+    -fx-text-fill: #222;
+}
