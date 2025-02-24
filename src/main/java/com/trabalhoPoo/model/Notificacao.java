@@ -6,7 +6,6 @@ public class Notificacao{
     private int usuarioId;
     private boolean lida;
 
-    //Construtores, Getters, Setters...
     public Notificacao() {}
 
     public Notificacao(int id, String mensagem, int usuarioId, boolean lida){
@@ -16,7 +15,6 @@ public class Notificacao{
         this.lida = lida;
     }
 
-    //Getters and Setters
     public int getId() {
         return id;
     }

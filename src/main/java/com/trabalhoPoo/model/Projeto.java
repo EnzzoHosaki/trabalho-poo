@@ -9,11 +9,7 @@ public class Projeto {
     private String descricao;
     private LocalDate dataInicio;
     private LocalDate dataTermino;
-    private String status;  // "Dentro do Prazo", "Atrasado", "Concluído"
-    //Relação n:n, optei por não colocar aqui
-    //private List<Usuario> responsaveis;  Removido para simplificar a modelagem.  A relação será tratada na tabela Responsaveis.
-
-    // Construtores, Getters, Setters...
+    private String status;
 
     public Projeto() {
     }
@@ -27,7 +23,6 @@ public class Projeto {
         this.status = status;
     }
 
-    // Getters e Setters
     public int getId() {
         return id;
     }

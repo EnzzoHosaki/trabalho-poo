@@ -78,18 +78,15 @@ public class LoginController {
 
     @FXML
     private void handleCadastro() {
-        //Abrir tela de cadastro
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/cadastro.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
 
             CadastroController controller = loader.getController();
-            //controller.setMainApp(this.mainApp); //Se você precisar passar dados
 
             stage.show();
 
-            // Fechar a janela de login, opcional
             ((Stage) emailField.getScene().getWindow()).close();
         }catch(IOException e){
             showAlert(AlertType.ERROR, "Erro", "Erro ao abrir a tela de Cadastro: " + e.getMessage());
@@ -105,12 +102,10 @@ public class LoginController {
             stage.setScene(new Scene(loader.load()));
 
             DashboardController controller = loader.getController();
-            controller.setUsuarioLogado(usuario); // Passa o usuário logado para o DashboardController
-            //controller.setMainApp(this.mainApp);
+            controller.setUsuarioLogado(usuario);
 
             stage.show();
 
-            // Fechar a janela de login
             ((Stage) emailField.getScene().getWindow()).close();
 
         } catch (IOException e) {

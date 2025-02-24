@@ -23,8 +23,6 @@ public class Usuario {
         this.tipo = tipo;
     }
 
-    //Getters and Setters
-
     public int getId() {
         return id;
     }

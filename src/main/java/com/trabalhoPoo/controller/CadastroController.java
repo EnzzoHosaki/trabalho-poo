@@ -20,13 +20,10 @@ public class CadastroController {
     @FXML private TextField emailField;
     @FXML private PasswordField senhaField;
     @FXML private PasswordField confirmarSenhaField;
-    //@FXML private ComboBox<String> tipoUsuarioComboBox; // Removido temporariamente
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
     @FXML
     private void initialize() {
-        // Para inicializar o ComboBox (Removido temporariamente)
-        //tipoUsuarioComboBox.getItems().addAll("Administrador", "Usuario");
     }
 
     @FXML
@@ -35,10 +32,9 @@ public class CadastroController {
         String email = emailField.getText();
         String senha = senhaField.getText();
         String confirmarSenha = confirmarSenhaField.getText();
-        //String tipoUsuario = tipoUsuarioComboBox.getValue();  // Removido temporariamente
-        String tipoUsuario = "Usuario"; // Definindo como Usuario comum para o MVP
+        String tipoUsuario = "Usuario";
 
-        if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || confirmarSenha.isEmpty() /*|| tipoUsuario == null*/) {
+        if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || confirmarSenha.isEmpty()) {
             showAlert(AlertType.ERROR, "Erro de Cadastro", "Preencha todos os campos.");
             return;
         }
@@ -49,14 +45,12 @@ public class CadastroController {
         }
 
         try {
-            //Verifica se já existe um usuário com o mesmo email
             if(usuarioDAO.buscarUsuarioPorEmail(email) != null){
                 showAlert(AlertType.ERROR, "Erro de Cadastro", "Já existe um usuário cadastrado com esse email.");
                 return;
             }
 
-            // Hash da senha ANTES de salvar no banco
-            String senhaHash = PasswordUtil.hashPassword(senha);  //  <--  Usando o método CORRETO do jBCrypt
+            String senhaHash = PasswordUtil.hashPassword(senha);
             Usuario novoUsuario = new Usuario(nome, email, senhaHash, tipoUsuario);
 
             usuarioDAO.adicionarUsuario(novoUsuario);

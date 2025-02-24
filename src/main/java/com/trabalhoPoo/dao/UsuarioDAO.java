@@ -22,7 +22,6 @@ public class UsuarioDAO {
             pstmt.setString(4, usuario.getTipo());
             pstmt.executeUpdate();
 
-            // Obter o ID gerado
             try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     usuario.setId(generatedKeys.getInt(1));
@@ -55,7 +54,6 @@ public class UsuarioDAO {
         return null;
     }
 
-    // MÉTODO PARA ATUALIZAR A SENHA (e outros dados) DO USUÁRIO
     public void atualizarUsuario(Usuario usuario) throws SQLException {
         String sql = "UPDATE Usuarios SET nome = ?, email = ?, senha = ?, tipo = ? WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -63,7 +61,7 @@ public class UsuarioDAO {
 
             pstmt.setString(1, usuario.getNome());
             pstmt.setString(2, usuario.getEmail());
-            pstmt.setString(3, usuario.getSenha()); // Já vai com o NOVO hash jBCrypt
+            pstmt.setString(3, usuario.getSenha());
             pstmt.setString(4, usuario.getTipo());
             pstmt.setInt(5, usuario.getId());
             pstmt.executeUpdate();

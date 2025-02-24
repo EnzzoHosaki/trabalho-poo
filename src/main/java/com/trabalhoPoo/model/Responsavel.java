@@ -2,10 +2,9 @@ package com.trabalhoPoo.model;
 
 public class Responsavel {
     private int usuarioId;
-    private Integer projetoId; // Pode ser null se for responsável apenas por uma atividade
-    private Integer atividadeId; // Pode ser null se for responsável apenas por um projeto
+    private Integer projetoId;
+    private Integer atividadeId;
 
-    // Construtores, Getters, Setters
     public Responsavel() {}
 
     public Responsavel(int usuarioId, Integer projetoId, Integer atividadeId){
@@ -14,7 +13,6 @@ public class Responsavel {
         this.atividadeId = atividadeId;
     }
 
-    //Getters and Setters
     public int getUsuarioId() {
         return usuarioId;
     }

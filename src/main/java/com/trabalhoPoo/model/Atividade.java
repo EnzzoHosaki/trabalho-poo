@@ -13,10 +13,6 @@ public class Atividade {
     private int porcentagemConclusao;
     private int projetoId; // FK para Projeto
     private String justificativa;
-    //Relação n:n, optei por não colocar aqui
-    //private List<Usuario> responsaveis;  Removido, tratado na tabela Responsaveis
-
-    // Construtores, Getters, Setters...
 
     public Atividade() {
     }
@@ -34,7 +30,6 @@ public class Atividade {
         this.justificativa = justificativa;
     }
 
-    //Getters and Setters
     public int getId() {
         return id;
     }
