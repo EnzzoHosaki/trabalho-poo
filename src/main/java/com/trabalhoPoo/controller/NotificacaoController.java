@@ -1,4 +1,10 @@
 package com.trabalhoPoo.controller;
 
-public class NotificacaoController {
+import javafx.fxml.FXML;
+public class NotificacaoController{
+
+    @FXML
+    private void initialize(){
+
+    }
 }
