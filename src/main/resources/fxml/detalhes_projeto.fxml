@@ -2,12 +2,24 @@
 
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.trabalhoPoo.controller.ProjetoController"
-            prefHeight="200.0" prefWidth="300.0">
-    <children>
-        <Label text="Detalhes do Projeto (Tela Vazia)" />
-    </children>
+            prefHeight="400.0" prefWidth="600.0">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <VBox spacing="10" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+        <Label fx:id="nomeLabel" text="Nome do Projeto: "/>
+        <Label fx:id="descricaoLabel" text="Descrição: "/>
+        <Label fx:id="dataInicioLabel" text="Data de Início: "/>
+        <Label fx:id="dataTerminoLabel" text="Data de Término: "/>
+        <Label fx:id="statusLabel" text="Status: "/>
+
+    </VBox>
 </AnchorPane>

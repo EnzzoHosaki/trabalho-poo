@@ -1,13 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.trabalhoPoo.controller.ProjetoController"
-            prefHeight="200.0" prefWidth="300.0">
-    <children>
-        <Label text="Criar/Editar Projeto (Tela Vazia)" AnchorPane.centerShape="true"  />
-    </children>
+            prefHeight="400.0" prefWidth="600.0">
+
+    <padding><Insets top="20" right="20" bottom="20" left="20" /></padding>
+
+    <Label text="Criar Novo Projeto" style="-fx-font-size: 20px; -fx-font-weight: bold;"
+           AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20"/>
+
+    <GridPane hgap="10" vgap="10" AnchorPane.topAnchor="60" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+        <Label text="Nome do Projeto:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="nomeField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <Label text="Descrição:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextArea fx:id="descricaoField" prefRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Data de Início:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <DatePicker fx:id="dataInicioField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Data de Término:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <DatePicker fx:id="dataTerminoField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+        <Label text="Responsáveis:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <ComboBox fx:id="responsaveisField" GridPane.columnIndex="1" GridPane.rowIndex="4"  prefWidth="200.0"/>
+        <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <ComboBox fx:id="statusField" GridPane.columnIndex="1" GridPane.rowIndex="5"  prefWidth="200.0"/>
+
+
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="120.0" />
+            <ColumnConstraints hgrow="ALWAYS" />
+        </columnConstraints>
+
+    </GridPane>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT" AnchorPane.bottomAnchor="20" AnchorPane.rightAnchor="20">
+        <Button text="Salvar" onAction="#handleSalvar" />
+        <Button text="Cancelar" onAction="#handleCancelar" />
+    </HBox>
+
 </AnchorPane>

@@ -2,12 +2,13 @@ package com.trabalhoPoo.dao;
 
 import com.trabalhoPoo.model.Usuario;
 import com.trabalhoPoo.util.DBConnection;
-//import com.trabalhoPoo.util.PasswordUtil; // Não precisa mais importar aqui
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioDAO {
 
@@ -25,7 +26,7 @@ public class UsuarioDAO {
             try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     usuario.setId(generatedKeys.getInt(1));
-                    return usuario;
+                    return usuario; // Retorna o usuário com o ID
                 } else {
                     throw new SQLException("Falha ao criar usuário, nenhum ID obtido.");
                 }
@@ -53,7 +54,6 @@ public class UsuarioDAO {
         }
         return null;
     }
-
     public void atualizarUsuario(Usuario usuario) throws SQLException {
         String sql = "UPDATE Usuarios SET nome = ?, email = ?, senha = ?, tipo = ? WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -66,5 +66,26 @@ public class UsuarioDAO {
             pstmt.setInt(5, usuario.getId());
             pstmt.executeUpdate();
         }
+    }
+
+    public List<Usuario> listarUsuarios() throws SQLException {
+        List<Usuario> usuarios = new ArrayList<>();
+        String sql = "SELECT * FROM Usuarios";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setTipo(rs.getString("tipo"));
+                usuarios.add(usuario);
+            }
+        }
+        return usuarios;
     }
 }
