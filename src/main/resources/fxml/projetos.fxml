@@ -15,7 +15,7 @@
                AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0">
         <columns>
             <TableColumn fx:id="nomeCol" text="Nome do Projeto" prefWidth="150.0" />
-            <TableColumn fx:id="dataTerminoCol" text="Data de Término" prefWidth="100.0" />
+            <TableColumn fx:id="dataInicioCol" text="Data de Início" prefWidth="100.0" />  <TableColumn fx:id="dataTerminoCol" text="Data de Término" prefWidth="100.0" />
             <TableColumn fx:id="statusCol" text="Status" prefWidth="100.0" />
             <TableColumn fx:id="acoesCol" text="Ações" prefWidth="200.0" />
         </columns>
@@ -23,6 +23,9 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
         </columnResizePolicy>
     </TableView>
+
     <Label text="Projetos" style="-fx-font-size: 24px; -fx-font-weight: bold;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+
+    <Button text="Criar Projeto" onAction="#handleCriarProjeto" AnchorPane.topAnchor="10.0" AnchorPane.rightAnchor="0.0" />
 
 </AnchorPane>

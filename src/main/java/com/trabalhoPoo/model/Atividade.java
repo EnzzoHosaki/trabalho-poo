@@ -70,10 +70,6 @@ public class Atividade {
         this.dataTermino = dataTermino;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
     public void setStatus(String status) {
         this.status = status;
     }
@@ -100,5 +96,16 @@ public class Atividade {
 
     public void setJustificativa(String justificativa) {
         this.justificativa = justificativa;
+    }
+
+    public String getStatus() {
+        LocalDate hoje = LocalDate.now();
+        if (this.status != null && this.status.equals("Concluído")) {
+            return "Concluído";
+        } else if (dataTermino.isBefore(hoje)) {
+            return "Atrasado";
+        } else {
+            return "Dentro do Prazo";
+        }
     }
 }

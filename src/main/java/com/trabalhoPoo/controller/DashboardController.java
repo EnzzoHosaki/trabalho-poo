@@ -21,8 +21,6 @@ public class DashboardController {
 
     public void setUsuarioLogado(Usuario usuario) {
         this.usuarioLogado = usuario;
-        // welcomeLabel.setText("Bem-vindo, " + usuarioLogado.getNome() + "!"); // <--  NÃO MAIS AQUI
-        // carregarResumo(); // Carrega as informações de resumo // <-- NÃO AQUI TAMBÉM
     }
 
     private void carregarResumo() {
@@ -53,14 +51,12 @@ public class DashboardController {
             projetosConcluidosLabel.setText("Projetos Concluídos: " + concluidos);
 
         } catch (SQLException e) {
-            // Tratar a exceção (ex: exibir uma mensagem de erro)
             e.printStackTrace();
         }
     }
 
     @FXML
     private void initialize(){
-        //Agora carrega os dados aqui, DEPOIS que o FXML for inicializado.
         if(usuarioLogado != null){
             welcomeLabel.setText("Bem-vindo, " + usuarioLogado.getNome() + "!");
             carregarResumo();

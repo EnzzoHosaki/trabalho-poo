@@ -29,8 +29,6 @@
 
         <Label text="Responsáveis:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
         <ComboBox fx:id="responsaveisField" GridPane.columnIndex="1" GridPane.rowIndex="4"  prefWidth="200.0"/>
-        <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-        <ComboBox fx:id="statusField" GridPane.columnIndex="1" GridPane.rowIndex="5"  prefWidth="200.0"/>
 
 
         <columnConstraints>

@@ -9,10 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 public class AtividadeDAO {
 
-    public void adicionarAtividade(Atividade atividade) throws SQLException{
+    public void adicionarAtividade(Atividade atividade) throws SQLException {
         String sql = "INSERT INTO Atividades (nome, descricao, data_inicio, data_termino, status, porcentagem_conclusao, projeto_id, justificativa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS)) {
@@ -21,7 +22,7 @@ public class AtividadeDAO {
             pstmt.setString(2, atividade.getDescricao());
             pstmt.setDate(3, java.sql.Date.valueOf(atividade.getDataInicio()));
             pstmt.setDate(4, java.sql.Date.valueOf(atividade.getDataTermino()));
-            pstmt.setString(5, atividade.getStatus());
+            pstmt.setString(5, atividade.getStatus()); //O status vai continuar sendo salvo no banco, pois o usuário pode querer mudar o status
             pstmt.setInt(6, atividade.getPorcentagemConclusao());
             pstmt.setInt(7, atividade.getProjetoId());
             pstmt.setString(8, atividade.getJustificativa());
@@ -54,7 +55,7 @@ public class AtividadeDAO {
                     atividade.setDescricao(rs.getString("descricao"));
                     atividade.setDataInicio(rs.getDate("data_inicio").toLocalDate());
                     atividade.setDataTermino(rs.getDate("data_termino").toLocalDate());
-                    atividade.setStatus(rs.getString("status"));
+                    atividade.setStatus(rs.getString("status")); //Aqui, o status que foi definido é salvo
                     atividade.setPorcentagemConclusao(rs.getInt("porcentagem_conclusao"));
                     atividade.setProjetoId(rs.getInt("projeto_id"));
                     atividade.setJustificativa(rs.getString("justificativa"));

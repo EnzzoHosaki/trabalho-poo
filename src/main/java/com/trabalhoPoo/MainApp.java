@@ -10,22 +10,20 @@ import com.trabalhoPoo.controller.MainLayoutController; // Import
 
 public class MainApp extends Application {
 
-    private static Stage primaryStage; // Referência estática para o palco principal
-    private static MainLayoutController mainLayoutController; // Referencia estática
+    private static Stage primaryStage;
+    private static MainLayoutController mainLayoutController;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        MainApp.primaryStage = primaryStage; // Armazena a referência
+        MainApp.primaryStage = primaryStage;
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml")); // Carrega o login inicialmente
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("Sistema de Gerenciamento de Atividades");
 
-        // ADICIONE ESTA LINHA para carregar o CSS:
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm()); //  <-- AQUI!
+        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
         primaryStage.setScene(scene);
-        // ***************************************************
 
         primaryStage.show();
     }
@@ -33,32 +31,24 @@ public class MainApp extends Application {
     public static void changeScene(String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(fxmlPath));
-            Parent root = loader.load(); //Carrega antes de pegar o controller
+            Parent root = loader.load();
 
-            // Verifica se o arquivo FXML carregado é o main_layout.fxml
             if (fxmlPath.equals("/fxml/main_layout.fxml")) {
-                // Atribui o controller a variável estática
                 mainLayoutController = loader.getController();
             }
 
             Scene scene = new Scene(root);
-            // ***************************************************
-            //  ADICIONE ESTA LINHA para carregar o CSS:
-            scene.getStylesheets().add(MainApp.class.getResource("/css/style.css").toExternalForm()); //  <-- AQUI!
-            // ***************************************************
-            primaryStage.setScene(scene); // Define a nova cena no palco principal
+            scene.getStylesheets().add(MainApp.class.getResource("/css/style.css").toExternalForm());
+            primaryStage.setScene(scene);
 
         } catch (IOException e) {
             e.printStackTrace();
-            // Tratar o erro (ex: exibir um alerta)
         }
     }
 
-    // ADICIONE ESTE MÉTODO:
     public static Stage getPrimaryStage() {
         return primaryStage;
     }
-    //Getter para o MainLayoutController
     public static MainLayoutController getMainLayoutController(){
         return mainLayoutController;
     }

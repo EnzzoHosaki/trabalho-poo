@@ -16,7 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import java.io.IOException;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane; // Import
+import javafx.scene.layout.BorderPane;
 
 public class LoginController {
 
@@ -46,15 +46,12 @@ public class LoginController {
                 if (PasswordUtil.checkPassword(senha, usuario.getSenha())) {
                     System.out.println("Senha correta (jBCrypt)!");
 
-                    // 1. Trocar para a tela principal (main_layout.fxml)
                     MainApp.changeScene("/fxml/main_layout.fxml");
 
-                    // 2. Obter o controller do MainLayout *depois* de mudar a cena
                     MainLayoutController mainController = MainApp.getMainLayoutController();
 
-                    // 3. Passar o usuário logado para o MainLayoutController
                     mainController.setUsuarioLogado(usuario);
-                    return; //  <-- Importante:  Sair do método se o login for bem-sucedido
+                    return;
                 } else {
                     System.out.println("Senha incorreta!");
                     showAlert(AlertType.ERROR, "Erro de Login", "Email ou senha inválidos.");
@@ -73,18 +70,15 @@ public class LoginController {
 
     @FXML
     private void handleCadastro() {
-        //Abrir tela de cadastro
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/cadastro.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
 
             CadastroController controller = loader.getController();
-            //controller.setMainApp(this.mainApp); //Se você precisar passar dados
 
             stage.show();
 
-            // Fechar a janela de login, opcional
             ((Stage) emailField.getScene().getWindow()).close();
         }catch(IOException e){
             showAlert(AlertType.ERROR, "Erro", "Erro ao abrir a tela de Cadastro: " + e.getMessage());

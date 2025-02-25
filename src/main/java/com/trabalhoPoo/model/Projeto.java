@@ -11,12 +11,19 @@ public class Projeto {
     private LocalDate dataTermino;
     private String status;
 
-
     public Projeto() {
     }
 
     public Projeto(int id, String nome, String descricao, LocalDate dataInicio, LocalDate dataTermino, String status) {
         this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.dataInicio = dataInicio;
+        this.dataTermino = dataTermino;
+        this.status = status;
+    }
+
+    public Projeto(String nome, String descricao, LocalDate dataInicio, LocalDate dataTermino, String status){
         this.nome = nome;
         this.descricao = descricao;
         this.dataInicio = dataInicio;
@@ -65,10 +72,11 @@ public class Projeto {
     }
 
     public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+        LocalDate hoje = LocalDate.now();
+        if (dataTermino.isBefore(hoje)) {
+            return "Atrasado";
+        } else {
+            return "Dentro do Prazo";
+        }
     }
 }

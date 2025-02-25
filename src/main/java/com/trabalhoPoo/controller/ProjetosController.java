@@ -15,16 +15,17 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Optional;
-import javafx.scene.layout.HBox; // Import HBox
 
+import javafx.scene.layout.HBox;
 
 public class ProjetosController {
 
     @FXML private TableView<Projeto> projetosTable;
     @FXML private TableColumn<Projeto, String> nomeCol;
+    @FXML private TableColumn<Projeto, LocalDate> dataInicioCol;
     @FXML private TableColumn<Projeto, LocalDate> dataTerminoCol;
     @FXML private TableColumn<Projeto, String> statusCol;
-    @FXML private TableColumn<Projeto, Void> acoesCol; // Coluna para botões de ação
+    @FXML private TableColumn<Projeto, Void> acoesCol;
 
     private ProjetoDAO projetoDAO = new ProjetoDAO();
     private ObservableList<Projeto> projetosData = FXCollections.observableArrayList();
@@ -32,14 +33,20 @@ public class ProjetosController {
     @FXML
     private void initialize() {
         nomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        dataInicioCol.setCellValueFactory(new PropertyValueFactory<>("dataInicio"));
         dataTerminoCol.setCellValueFactory(new PropertyValueFactory<>("dataTermino"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        // Configura a coluna de ações (botão "Visualizar")
         acoesCol.setCellFactory(criarBotoesAcao());
 
         carregarProjetos();
     }
+
+    @FXML
+    private void handleCriarProjeto() {
+        abrirTela("/fxml/criar_projeto.fxml", "Criar Projeto");
+    }
+
 
     public void carregarProjetos() {
         try {
@@ -61,7 +68,7 @@ public class ProjetosController {
 
                     private final Button btnVisualizar = new Button("Visualizar");
                     private final Button btnEditar = new Button("Editar"); // Botão Editar
-                    private final Button btnExcluir = new Button("Excluir");// Botão Excluir
+                    private final Button btnExcluir = new Button("Excluir"); // Botão Excluir
 
 
                     {
@@ -70,13 +77,11 @@ public class ProjetosController {
                             abrirTelaDetalhesProjeto(projeto);
                         });
 
-                        //Ação do botão editar
                         btnEditar.setOnAction(event -> {
                             Projeto projeto = getTableView().getItems().get(getIndex());
                             abrirTelaEditarProjeto(projeto);
                         });
 
-                        //Ação do botão excluir
                         btnExcluir.setOnAction(event -> {
                             Projeto projeto = getTableView().getItems().get(getIndex());
                             excluirProjeto(projeto);
@@ -89,9 +94,9 @@ public class ProjetosController {
                         if (empty) {
                             setGraphic(null);
                         } else {
-                            // Adiciona os botões à célula
-                            HBox pane = new HBox(btnVisualizar, btnEditar, btnExcluir); // Adiciona os botões
-                            pane.setSpacing(10); //Espaçamento entre os botões
+
+                            HBox pane = new HBox(btnVisualizar, btnEditar, btnExcluir);
+                            pane.setSpacing(10);
                             setGraphic(pane);
 
                         }
@@ -100,7 +105,21 @@ public class ProjetosController {
             }
         };
     }
-    //Método para abrir a tela de detalhes, agora recebendo o Projeto
+
+    private void abrirTela(String fxmlPath, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle(title);
+            stage.show();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao abrir a tela: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // Método para abrir a tela de detalhes, agora genérico.
     private void abrirTelaDetalhesProjeto(Projeto projeto) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/detalhes_projeto.fxml"));
@@ -108,8 +127,8 @@ public class ProjetosController {
             stage.setScene(new Scene(loader.load()));
             stage.setTitle("Detalhes do Projeto");
 
-            ProjetoController controller = loader.getController();
-            controller.setProjeto(projeto); // Passa o projeto
+            DetalhesProjetoController controller = loader.getController();
+            controller.setProjeto(projeto);
 
             stage.show();
 
@@ -128,10 +147,10 @@ public class ProjetosController {
             stage.setTitle("Editar Projeto");
 
             ProjetoController controller = loader.getController();
-            controller.setProjeto(projeto); //Passa o projeto para a tela
+            controller.setProjeto(projeto);
             stage.show();
 
-            stage.setOnHiding(event -> carregarProjetos()); // Atualiza a tabela quando fechar a tela
+            stage.setOnHiding(event -> carregarProjetos());
         } catch (IOException e){
             showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao abrir a tela de Editar Projeto: " + e.getMessage());
             e.printStackTrace();
@@ -144,9 +163,8 @@ public class ProjetosController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-    // Adicione os métodos handleEditarProjeto e handleExcluirProjeto aqui
+
     private void excluirProjeto(Projeto projeto){
-        // 1. Confirmar a exclusão
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmar Exclusão");
         alert.setHeaderText("Excluir Projeto");
@@ -154,11 +172,10 @@ public class ProjetosController {
 
         Optional<ButtonType> result = alert.showAndWait();
 
-        // 2. Se confirmar, excluir
         if (result.isPresent() && result.get() == ButtonType.OK){
             try{
-                projetoDAO.excluirProjeto(projeto.getId()); //Chama o método do DAO
-                projetosData.remove(projeto);       //Remove da lista da tabela
+                projetoDAO.excluirProjeto(projeto.getId());
+                projetosData.remove(projeto);
                 showAlert(Alert.AlertType.INFORMATION, "Sucesso!", "Projeto Excluído com Sucesso!");
             } catch(SQLException e){
                 showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao excluir o projeto: "+ e.getMessage());

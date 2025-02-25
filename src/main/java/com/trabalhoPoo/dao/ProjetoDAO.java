@@ -13,7 +13,7 @@ import java.util.List;
 public class ProjetoDAO {
 
     public void adicionarProjeto(Projeto projeto) throws SQLException {
-        String sql = "INSERT INTO Projetos (nome, descricao, data_inicio, data_termino, status) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Projetos (nome, descricao, data_inicio, data_termino) VALUES (?, ?, ?, ?)"; //Removido o status
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS)) {
 
@@ -21,7 +21,6 @@ public class ProjetoDAO {
             pstmt.setString(2, projeto.getDescricao());
             pstmt.setDate(3, java.sql.Date.valueOf(projeto.getDataInicio()));
             pstmt.setDate(4, java.sql.Date.valueOf(projeto.getDataTermino()));
-            pstmt.setString(5, projeto.getStatus());
             pstmt.executeUpdate();
 
             try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
@@ -48,7 +47,6 @@ public class ProjetoDAO {
                 projeto.setDescricao(rs.getString("descricao"));
                 projeto.setDataInicio(rs.getDate("data_inicio").toLocalDate());
                 projeto.setDataTermino(rs.getDate("data_termino").toLocalDate());
-                projeto.setStatus(rs.getString("status"));
                 projetos.add(projeto);
             }
         }
@@ -57,7 +55,7 @@ public class ProjetoDAO {
 
 
     public void atualizarProjeto(Projeto projeto) throws SQLException {
-        String sql = "UPDATE Projetos SET nome = ?, descricao = ?, data_inicio = ?, data_termino = ?, status = ? WHERE id = ?";
+        String sql = "UPDATE Projetos SET nome = ?, descricao = ?, data_inicio = ?, data_termino = ? WHERE id = ?"; //Removido o status
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -65,8 +63,7 @@ public class ProjetoDAO {
             pstmt.setString(2, projeto.getDescricao());
             pstmt.setDate(3, java.sql.Date.valueOf(projeto.getDataInicio()));
             pstmt.setDate(4, java.sql.Date.valueOf(projeto.getDataTermino()));
-            pstmt.setString(5, projeto.getStatus());
-            pstmt.setInt(6, projeto.getId());
+            pstmt.setInt(5, projeto.getId());
             pstmt.executeUpdate();
         }
     }
@@ -82,5 +79,26 @@ public class ProjetoDAO {
         }
     }
 
-    // Adicione outros métodos (buscarPorId, etc.) depois, se necessário.
+    //buscar projeto por ID
+    public Projeto buscarProjetoPorId(int id) throws SQLException {
+        String sql = "SELECT * FROM Projetos WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    Projeto projeto = new Projeto();
+                    projeto.setId(rs.getInt("id"));
+                    projeto.setNome(rs.getString("nome"));
+                    projeto.setDescricao(rs.getString("descricao"));
+                    projeto.setDataInicio(rs.getDate("data_inicio").toLocalDate());
+                    projeto.setDataTermino(rs.getDate("data_termino").toLocalDate());
+                    //projeto.setStatus(rs.getString("status"));
+                    return projeto;
+                }
+            }
+        }
+        return null;
+    }
 }
